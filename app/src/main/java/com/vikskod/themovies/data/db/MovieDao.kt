@@ -1,23 +1,20 @@
 package com.vikskod.themovies.data.db
 
-import androidx.room.*
-import com.vikskod.themovies.data.model.Movie
-
-
-/**
- * Created by Vikash Parajuli on 31/01/2021.
- * vparajuli819@gmail.com
- */
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.vikskod.themovies.data.model.movie.Movie
 
 @Dao
 interface MovieDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveMovies(movieList: List<Movie>)
+@Insert(onConflict = OnConflictStrategy.REPLACE)
+suspend fun saveMovies(movies : List<Movie>)
 
-    @Query("DELETE FROM table_movie")
-    suspend fun deleteAllMovies()
+@Query("DELETE FROM popular_movies")
+suspend fun deleteAllMovies()
 
-    @Query("SELECT * FROM table_movie")
-    suspend fun getAllMovies(): List<Movie>
+@Query("SELECT * FROM popular_movies")
+suspend fun getMovies():List<Movie>
 }
